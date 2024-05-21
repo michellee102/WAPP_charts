@@ -44,4 +44,5 @@
 
 .. Verder experimenteren: Voor elke chart kun je hier de properties vinden:https://www.chartjs.org/docs/latest/charts/line.html#dataset-properties
     
+    https://react-chartjs-2.js.org/components/bar
 
