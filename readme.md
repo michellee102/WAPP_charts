@@ -3,10 +3,10 @@ In deze workshop gaan we een bar chart van Chart.js implementeren om de aantalle
 
 >**Documentatie**
 In deze workshop wordt chart.js en de wrapper voor React gebruikt. Er zijn ook wrappers voor Angular en Vue en Blazor:
-**React:**  https://react-chartjs-2.js.org/
-**Vue:**  https://vue-chartjs.org/
-**Angular:** https://github.com/valor-software/ng2-charts
-**Blazor:** https://github.com/erossini/BlazorChartjs
+**React:**  https://react-chartjs-2.js.org/ <br>
+**Vue:**  https://vue-chartjs.org/ <br>
+**Angular:** https://github.com/valor-software/ng2-charts <br>
+**Blazor:** https://github.com/erossini/BlazorChartjs <br>
 [Alle mogelijke integraties](https://github.com/chartjs/awesome?tab=readme-ov-file#integrations)
 
 ***
