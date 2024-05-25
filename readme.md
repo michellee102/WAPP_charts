@@ -2,12 +2,14 @@
 In deze workshop gaan we een bar chart van Chart.js implementeren om de aantallen verschillende property types van alle airBNBS te tonen en per buurt te kunnen filteren.
 
 >**Documentatie**
-In deze workshop wordt chart.js en de wrapper voor React gebruikt. Er zijn ook wrappers voor Angular en Vue en Blazor: <br>
+In deze workshop wordt chart.js en de wrapper voor React gebruikt. Er zijn ook wrappers voor Angular en Vue en Blazor en meer: <br>
 **React:**  https://react-chartjs-2.js.org/ <br>
 **Vue:**  https://vue-chartjs.org/ <br>
 **Angular:** https://github.com/valor-software/ng2-charts <br>
 **Blazor:** https://github.com/erossini/BlazorChartjs <br>
-[Alle mogelijke integraties](https://github.com/chartjs/awesome?tab=readme-ov-file#integrations)
+[Alle mogelijke integraties](https://github.com/chartjs/awesome?tab=readme-ov-file#integrations) <br>
+
+Natuurlijk kun je ook gewoon de plain charts.js gebruiken.
 
 ***
 ## 1. Simpele bar chart toevoegen.
