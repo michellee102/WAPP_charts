@@ -15,12 +15,6 @@ Natuurlijk kun je ook gewoon de plain charts.js gebruiken.
 ## 1. Simpele bar chart toevoegen.
 
 ###  Installeer de dependencies 
-De benodigde packages:
-```json
-"chart.js": "^4.4.3",
-"react-chartjs-2": "^5.2.0",
-```
-
 Voer dit uit in de terminal:
 ```
 npm install 
