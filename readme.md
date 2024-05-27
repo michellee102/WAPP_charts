@@ -7,6 +7,7 @@ In deze workshop wordt chart.js en de wrapper voor React gebruikt. Er zijn ook w
 **Vue:**  https://vue-chartjs.org/ <br>
 **Angular:** https://github.com/valor-software/ng2-charts <br>
 **Blazor:** https://github.com/erossini/BlazorChartjs <br>
+**MVC:** https://www.nuget.org/packages/ChartJSCore <br>
 [Alle mogelijke integraties](https://github.com/chartjs/awesome?tab=readme-ov-file#integrations) <br>
 
 Natuurlijk kun je ook gewoon de plain charts.js gebruiken.
