@@ -7,7 +7,7 @@ import FinishedApp from './FinishedApp';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <FinishedApp />
+    <App />
   </React.StrictMode>
 );
 
