@@ -14,7 +14,7 @@ Natuurlijk kun je ook gewoon de plain charts.js gebruiken.
 ***
 ## 1. Simpele bar chart toevoegen.
 
-### Installeer de dependencies 
+###  Installeer de dependencies 
 De benodigde packages:
 ```json
 "chart.js": "^4.4.3",
@@ -26,7 +26,8 @@ Voer dit uit in de terminal:
 npm install 
 ```
 
-### Importeer de benodigde dependencies
+### 1.1 Importeer de benodigde dependencies
+Open het bestand `App.js` in de `/src/App.js` bij `stap 1 in de code.`
 
 ```js
 import {
@@ -38,7 +39,8 @@ import {
 import { Bar } from 'react-chartjs-2';
 import jsonData from './data/data.json';
 ```
-### Registreer de chartsJs grafiek
+### 1.2 Registreer de chartsJs grafiek
+Registreer de chart onder alle imports bij `stap 2 in de code.`
 ```jsx
 ChartJS.register(
   CategoryScale,
@@ -47,7 +49,10 @@ ChartJS.register(
 );
 ```
 
-### Verwerk de JSON data om de juiste labels en hun waardes te verkrijgen
+### 1.3 Verwerk de JSON data om de juiste labels en hun waardes te verkrijgen
+Deze code leest de JSON data uit, en slaat de aantal property types en de waardes op in een object.
+
+Plaats deze methode bij `stap 3 in de code`.
 ```js
   // Process JSON data to count listings for each property type
   const processData = () => {
@@ -69,9 +74,14 @@ ChartJS.register(
     return { labels, dataValues };
   };
 
+   const { labels, dataValues } = processData();
+
 ```
 
-### Definieer het data object voor de grafiek
+### 1.4 Definieer het data object voor de grafiek
+Met dit object kun je de styling en data van de grafiek bepalen.
+Plaats dit bij `stap 4 in de code.`
+
 ```js
 const data = {
     labels,
@@ -98,11 +108,12 @@ const data = {
   };
   ```
 
-  ### Voeg de bar chart toe aan de app
+  ### 1.5 Voeg de bar chart toe aan de app
+Plaats dit bij `stap 5 in de code.`
   ```jsx
-   return (
+
     <Bar data={data}  />
-   );
+
   ```
 
    ### Run de app en kijk of alles is gelukt
@@ -113,7 +124,7 @@ const data = {
 ## 2. Grafiek beter leesbaar maken.
 In deze stap gaan we zorgen dat de chart beter leesbaar wordt en ook reageert op filteren op verschillende buurten.
 
-  ### Tooltip en titel toevoegen
+  ### 2.1 Tooltip en titel toevoegen
   Voeg aan het import statement de Tooltip en Title toe:
   ```js
   import {
@@ -126,7 +137,7 @@ In deze stap gaan we zorgen dat de chart beter leesbaar wordt en ook reageert op
 } from 'chart.js';
   ```
 
-en update het register statement:
+en update het huidige register statement:
 ```js
 ChartJS.register(
   CategoryScale,
@@ -136,13 +147,18 @@ ChartJS.register(
   Title
 );
 ```
-Als je de grafiek nu opent kun je zien dat de tooltip al werkt, voor de titel moeten we naar de volgende stap.
+Als je de grafiek nu opent, kun je zien dat de tooltip al werkt. Hover hiervoor over de bars in de grafiek. Om de titel te tonen, moeten we naar de volgende stap.
 
-   ### Maak een nieuw object voor de chart options
+   ### 2.2 Maak een nieuw object voor de chart options
+  
    Aan een chart.js grafiek kun je verschillende 'options' meegeven. Voeg onderstaande code toe om een title en beschrijving van de x en y-assen toe te voegen.
+
+   Plaats dit bij `stap 6 in de code.`
   ```js
   const options = {
     responsive: true,
+    // Met plugins kun je extra features aan je grafiek toevoegen, zoals
+    // een legenda, titel, etc.
     plugins: {
       title: {
         display: true,
@@ -172,24 +188,39 @@ Als je de grafiek nu opent kun je zien dat de tooltip al werkt, voor de titel mo
   };
   ```
   ***
+
+
+  ### 2.3 Voeg de options toe aan de bar object
+Update de huidige Bar component en voeg de options toe die je bij de stap hiervoor heb gedefinieerd.
+  ```jsx
+<Bar data={data} options={options}  />
+  ```
+
+### Run de applicatie en als alles goed is kun je nu de titel zien.
+
  ## 3.Data filteren en grafiek updaten
 
- ### Import Dropdown button
+ ### 3.1 Import Dropdown button
+ Plaats dit bij `stap 7 in de code.`
  ```js
 import { Dropdown } from 'react-bootstrap';
  ```
 
  ### Haal alle neighbourhood namen op uit de JSON
+Plaats dit bij `stap 8 in de code.`
+
 ```js
   const neighbourhoodNames = ['All', ...new Set(jsonData.map(item => item.neighbourhood))];
 ```
 
  ### Houdt de state bij van geselecteerde filter
+ Plaats dit bij `stap 9 in de code.`
  ```js
   const [selectedNeighbourhood, setSelectedNeighbourhood] = useState('All'); 
 ```
 
 ### Voeg de dropdown met de neighbourhoods toe aan de app:
+vervang het hele return statement
 ```jsx
   return (
     <div className="App" style={{ width: '1000px', height: '700px' }} >
@@ -216,6 +247,7 @@ import { Dropdown } from 'react-bootstrap';
 ```
 
 ## Voeg onclick implementatie toe voor het filteren
+Plaats dit bij `stap 10 in de code.`
 ```js
   const handleNeighbourhoodClick = (neighbourhood) => {
     setSelectedNeighbourhood(neighbourhood);
@@ -223,6 +255,7 @@ import { Dropdown } from 'react-bootstrap';
 ```
 
 ## Update de processData methode om te kunnen filteren op neighbourhoods
+Vervang je huidige processData versie met deze code.
 ```jsx
  // Process JSON data to count listings for each property type in the selected neighborhood
   const processData = (neighborhood = 'All') => {
@@ -246,6 +279,29 @@ import { Dropdown } from 'react-bootstrap';
     return { labels, dataValues };
   };
 ```
+
+### Zorg ervoor dat de data wordt geupdate met filter
+Update dit statement ``const { labels, dataValues } = processData(); ``
+Met onderstaande code, zodat als er gefilterd wordt op buurt, de data geupdate wordt.
+```js
+  const { labels, dataValues } = processData(selectedNeighbourhood);
+```
+
+### Voeg de onclick methode toe aan de dropdown
+
+
+```jsx
+       <Dropdown.Item
+              className='text-dark'
+              key={index}
+              onClick={() => handleNeighbourhoodClick(neighbourhood)}
+            >
+              {neighbourhood}
+            </Dropdown.Item>
+
+```
+
+Nu kun je filteren en wordt de grafiek geupdate.
 
 ## Verder experimenteren?
 Voor elke chart kun je [hier,](https://www.chartjs.org/docs/latest/) onder het kopje **Chart types** alle charts vinden en hun properties.
