@@ -95,7 +95,7 @@ const data = {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 205, 86, 1)',
         ],
-        borderWidth: 1.5, // Add border width
+        borderWidth: 1.5, 
       },
     ],
   };
