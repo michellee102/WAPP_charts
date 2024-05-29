@@ -1,5 +1,5 @@
 # Workshop Charts.js 
-In deze workshop gaan we een bar chart van Chart.js implementeren om de aantallen verschillende property types van alle airBNBS te tonen en per buurt te kunnen filteren.
+In deze workshop gaan we een bar chart van Chart.js implementeren om de top 5 meest voorkomende property types van alle AirBnbs te tonen en per neighbourhood te kunnen filteren.
 
 >**Documentatie**
 In deze workshop wordt chart.js en de wrapper voor React gebruikt. Er zijn ook wrappers voor Angular en Vue en Blazor en meer: <br>
@@ -10,19 +10,19 @@ In deze workshop wordt chart.js en de wrapper voor React gebruikt. Er zijn ook w
 **MVC:** https://www.nuget.org/packages/ChartJSCore <br>
 [Alle mogelijke integraties](https://github.com/chartjs/awesome?tab=readme-ov-file#integrations) <br>
 
-Natuurlijk kun je ook gewoon de plain charts.js gebruiken.
+Natuurlijk kun je ook gewoon de plain javascript charts.js gebruiken.
 
 ***
 ## 1. Simpele bar chart toevoegen.
 
-###  Installeer de dependencies 
+###  Installeren van de packages 
 Voer dit uit in de terminal:
 ```
 npm install 
 ```
 
 ### 1.1 Importeer de benodigde dependencies
-Open het bestand `App.js` in de `/src/App.js` bij `stap 1 in de code.`
+Open het bestand `App.js` in de `/src/App.js` en plaats de imports bij `stap 1 in de code.`
 
 ```js
 import {
@@ -45,11 +45,10 @@ ChartJS.register(
 ```
 
 ### 1.3 Verwerk de JSON data om de juiste labels en hun waardes te verkrijgen
-Deze code leest de JSON data uit, en slaat de aantal property types en de waardes op in een object.
+Deze code leest de JSON data uit, en slaat de top 5 property types en hun aantallen op.
 
 Plaats deze methode bij `stap 3 in de code`.
 ```js
-  // Process JSON data to count listings for each property type
   const processData = () => {
     const propertyCounts = {};
     jsonData.forEach(item => {
@@ -57,12 +56,10 @@ Plaats deze methode bij `stap 3 in de code`.
       propertyCounts[propertyType] = (propertyCounts[propertyType] || 0) + 1;
     });
 
-    // Sort the property counts
     const sortedCounts = Object.entries(propertyCounts)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 5); // Get top 5
+      .slice(0, 5);
 
-    // Extract labels and dataValues from sortedCounts
     const labels = sortedCounts.map(entry => entry[0]);
     const dataValues = sortedCounts.map(entry => entry[1]);
 
@@ -74,8 +71,8 @@ Plaats deze methode bij `stap 3 in de code`.
 ```
 
 ### 1.4 Definieer het data object voor de grafiek
-Met dit object kun je de styling en data van de grafiek bepalen.
 Plaats dit bij `stap 4 in de code.`
+Voeg eventueel je eigen styling toe.
 
 ```js
 const data = {
@@ -117,9 +114,9 @@ Plaats dit bij `stap 5 in de code.`
   ```
 ***
 ## 2. Grafiek beter leesbaar maken.
-In deze stap gaan we zorgen dat de chart beter leesbaar wordt en ook reageert op filteren op verschillende buurten.
+In deze stap gaan we zorgen dat de chart beter leesbaar wordt.
 
-  ### 2.1 Tooltip en titel toevoegen
+  ### 2.1 Tooltip en omschrijving voor grafiek toevoegen
   Voeg aan het import statement de Tooltip en Title toe:
   ```js
   import {
@@ -146,14 +143,12 @@ Als je de grafiek nu opent, kun je zien dat de tooltip al werkt. Hover hiervoor 
 
    ### 2.2 Maak een nieuw object voor de chart options
   
-   Aan een chart.js grafiek kun je verschillende 'options' meegeven. Voeg onderstaande code toe om een title en beschrijving van de x en y-assen toe te voegen.
+   Aan een chart.js grafiek kun je verschillende 'options' meegeven. Voeg onderstaande code toe om een titel en beschrijving van de x en y-assen toe te voegen.
 
    Plaats dit bij `stap 6 in de code.`
   ```js
   const options = {
     responsive: true,
-    // Met plugins kun je extra features aan je grafiek toevoegen, zoals
-    // een legenda, titel, etc.
     plugins: {
       title: {
         display: true,
@@ -166,7 +161,7 @@ Als je de grafiek nu opent, kun je zien dat de tooltip al werkt. Hover hiervoor 
           display: true,
           text: 'Property Type',
           font: {
-            weight: 'bold', // Maak de titel van de X-as vetgedrukt
+            weight: 'bold',
           },
         },
       },
@@ -175,7 +170,7 @@ Als je de grafiek nu opent, kun je zien dat de tooltip al werkt. Hover hiervoor 
           display: true,
           text: 'Number of Listings',
           font: {
-            weight: 'bold', // Maak de titel van de Y-as vetgedrukt
+            weight: 'bold',
           },
         },
       },
@@ -185,13 +180,13 @@ Als je de grafiek nu opent, kun je zien dat de tooltip al werkt. Hover hiervoor 
   ***
 
 
-  ### 2.3 Voeg de options toe aan de bar object
-Update de huidige Bar component en voeg de options toe die je bij de stap hiervoor heb gedefinieerd.
+  ### 2.3 Voeg de options toe aan de grafiek
+Update het huidige Bar component en voeg de options toe die je bij de stap 2.2 heb gedefinieerd.
   ```jsx
 <Bar data={data} options={options}  />
   ```
 
-### Run de applicatie en als alles goed is kun je nu de titel zien.
+### Run de applicatie en als alles goed is kun je nu de titel en namen voor x-as en y-as zien zien.
 
  ## 3.Data filteren en grafiek updaten
 
@@ -208,19 +203,17 @@ Plaats dit bij `stap 8 in de code.`
   const neighbourhoodNames = ['All', ...new Set(jsonData.map(item => item.neighbourhood))];
 ```
 
- ### Houdt de state bij van geselecteerde filter
+ ### Houdt de state bij voor het geselecteerde filter
  Plaats dit bij `stap 9 in de code.`
  ```js
   const [selectedNeighbourhood, setSelectedNeighbourhood] = useState('All'); 
 ```
 
 ### Voeg de dropdown met de neighbourhoods toe aan de app:
-vervang het hele return statement
+Vervang het hele return statement
 ```jsx
   return (
     <div className="App" style={{ width: '1000px', height: '700px' }} >
-
-      {/* Dropdown button with Bootstrap classes */}
       <Dropdown Dropdown className='p-2' >
         <Dropdown.Toggle variant="secondary" id="dropdown-basic">
           {selectedNeighbourhood}
@@ -252,22 +245,19 @@ Plaats dit bij `stap 10 in de code.`
 ## Update de processData methode om te kunnen filteren op neighbourhoods
 Vervang je huidige processData versie met deze code.
 ```jsx
- // Process JSON data to count listings for each property type in the selected neighborhood
-  const processData = (neighborhood = 'All') => {
+  const processData = (neighbourhood = 'All') => {
     const propertyCounts = {};
     jsonData.forEach(item => {
-      if (neighborhood === 'All' || item.neighbourhood === neighborhood) { // Filter by selected neighborhood
+      if (neighbourhood === 'All' || item.neighbourhood === neighbourhood) { // Filter by selected neighborhood
         const { propertyType } = item;
         propertyCounts[propertyType] = (propertyCounts[propertyType] || 0) + 1;
       }
     });
 
-    // Sort the property counts
     const sortedCounts = Object.entries(propertyCounts)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 5); // Get top 5
+      .slice(0, 5);
 
-    // Extract labels and dataValues from sortedCounts
     const labels = sortedCounts.map(entry => entry[0]);
     const dataValues = sortedCounts.map(entry => entry[1]);
 
@@ -282,9 +272,7 @@ Met onderstaande code, zodat als er gefilterd wordt op buurt, de data geupdate w
   const { labels, dataValues } = processData(selectedNeighbourhood);
 ```
 
-### Voeg de onclick methode toe aan de dropdown
-
-
+### Voeg de onclick methode toe aan de dropdown items
 ```jsx
        <Dropdown.Item
               className='text-dark'
