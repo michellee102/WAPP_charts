@@ -10,7 +10,8 @@ In deze workshop wordt chart.js en de wrapper voor React gebruikt. Er zijn ook w
 **MVC:** https://www.nuget.org/packages/ChartJSCore <br>
 [Alle mogelijke integraties](https://github.com/chartjs/awesome?tab=readme-ov-file#integrations) <br>
 
-Natuurlijk kun je ook gewoon de plain javascript charts.js gebruiken.
+Natuurlijk kun je ook gewoon de plain javascript charts.js gebruiken: <br>
+https://www.chartjs.org/docs/latest/
 
 ***
 ## 1. Simpele bar chart toevoegen.
@@ -94,7 +95,7 @@ const data = {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 205, 86, 1)',
         ],
-        borderWidth: 1.5, // Add border width
+        borderWidth: 1.5, 
       },
     ],
   };
