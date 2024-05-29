@@ -1,3 +1,5 @@
+# Test
+
 # Workshop Charts.js 
 In deze workshop gaan we een bar chart van Chart.js implementeren om de top 5 meest voorkomende property types van alle AirBnbs te tonen en per neighbourhood te kunnen filteren.
 
